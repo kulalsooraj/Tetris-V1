@@ -27,7 +27,7 @@ resource "aws_iam_instance_profile" "example_profile" {
 }
 
 
-resource "aws_security_group" "Jenkins-sg" {
+resource "aws_security_group" "Jenkins_sg2" {
   name        = "Jenkins-Security Group"
   description = "Open 22,443,80,8080,9000"
 
@@ -59,10 +59,10 @@ resource "aws_security_group" "Jenkins-sg" {
 }
 
 resource "aws_instance" "web" {
-  ami                    = "ami-0df4b2961410d4cff"
-  instance_type          = "t2.medium"
-  key_name               = "mumbai-mac"
-  vpc_security_group_ids = [aws_security_group.Jenkins-sg.id]
+  ami                    = "ami-02b8269d5e85954ef"
+  instance_type          = "c7i-flex.large"
+  key_name               = "new-test26"
+  vpc_security_group_ids = [aws_security_group.Jenkins_sg2.id]
   user_data              = templatefile("./install_jenkins.sh", {})
   iam_instance_profile   = aws_iam_instance_profile.example_profile.name
 
